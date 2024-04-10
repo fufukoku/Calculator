@@ -5,7 +5,9 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -56,121 +58,183 @@ class MainActivity : ComponentActivity() {
 fun CalculatorLayout(modifier: Modifier = Modifier) {
     var num1 by remember { mutableStateOf("") }
     var num2 by remember { mutableStateOf("") }
-    var res by remember { mutableStateOf("") }
-    TextField(
-        value = num1,
-        singleLine = true,
-        label = {Text("Enter Number 1")},
-        onValueChange = {num1 = it},
-        keyboardOptions = KeyboardOptions.Default.copy
-            (keyboardType = KeyboardType.Number,
-            imeAction = ImeAction.Done),
-        modifier = Modifier.fillMaxWidth()
-
+    var input by remember { mutableStateOf("") }
+    var output by remember { mutableStateOf("") }
+    var outputNum: Double = 0.0
+    var symbol1 by remember { mutableStateOf("0") }
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(30.dp),
+        horizontalAlignment = AbsoluteAlignment.Right
     )
-    TextField(
-        value = num2,
-        singleLine = true,
-        label = {Text("Enter Number 2")},
-        onValueChange = {num2 = it},
-        keyboardOptions = KeyboardOptions.Default.copy
-            (keyboardType = KeyboardType.Number,
-            imeAction = ImeAction.Done),
-        modifier = Modifier.fillMaxWidth()
+    {
+        Box(modifier = Modifier)
+        {
+            Text(text = output)
+        }
 
-    )
-    TextField(
-        value = res,
-        singleLine = true,
-        label = {Text("$res")},
-        onValueChange = {res = it},
-        keyboardOptions = KeyboardOptions.Default.copy
-            (keyboardType = KeyboardType.Number,
-            imeAction = ImeAction.Done),
-        modifier = Modifier.fillMaxWidth()
-    )
-    Column(modifier = modifier, verticalArrangement = Arrangement.Top,horizontalAlignment = AbsoluteAlignment.Left)
-    {
-    Button(onClick = {
-        num1 = "1"
-    }) {
-        Text("1")
-    }}
-    Column(modifier = modifier, verticalArrangement = Arrangement.Top,horizontalAlignment = Alignment.CenterHorizontally)
-    {
-    Button(onClick = {
-        num1 = "2"
-    }) {
-        Text("2")
-    }}
-    Column(modifier = modifier, verticalArrangement = Arrangement.Top,horizontalAlignment = AbsoluteAlignment.Right)
-    {
-        Button(onClick = {
-            num1 = "3"
-        }) {
-            Text("3")
-        }}
-    Spacer(modifier = Modifier.height(60.dp))
-    Column(modifier = modifier, verticalArrangement = Arrangement.Center,horizontalAlignment = AbsoluteAlignment.Left)
-    {
-        Button(onClick = {
-            num1 = "4"
-        }) {
-            Text("4")
-        }}
-    Column(modifier = modifier, verticalArrangement = Arrangement.Center,horizontalAlignment = Alignment.CenterHorizontally)
-    {
-        Button(onClick = {
-            num1 = "5"
-        }) {
-            Text("5")
-        }}
-    Column(modifier = modifier, verticalArrangement = Arrangement.Center,horizontalAlignment = AbsoluteAlignment.Right)
-    {
-        Button(onClick = {
-            num1 = "6"
-        }) {
-            Text("6")
-        }}
-    Spacer(modifier = Modifier.height(60.dp))
-    Column(modifier = modifier, verticalArrangement = Arrangement.Bottom,horizontalAlignment = AbsoluteAlignment.Left)
-    {
-        Button(onClick = {
-            num1 = "7"
-        }) {
-            Text("7")
-        }}
-    Column(modifier = modifier, verticalArrangement = Arrangement.Bottom,horizontalAlignment = Alignment.CenterHorizontally)
-    {
-        Button(onClick = {
-            num1 = "8"
-        }) {
-            Text("8")
-        }}
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(30.dp),horizontalAlignment = AbsoluteAlignment.Right)
-    {
-        Button(onClick = {
-            num1 = "9"
-        }) {
-            Text("9")
-        }}
-    Spacer(modifier = Modifier.height(60.dp))
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(30.dp),horizontalAlignment = AbsoluteAlignment.Right)
-    {
-        Button(onClick = {
-            num1 = "0"
-        }) {
-            Text("0")
-        }}
+        Row {
+            Column(
+                modifier = modifier,
+                verticalArrangement = Arrangement.spacedBy(30.dp),
+                horizontalAlignment = AbsoluteAlignment.Right
+            )
+            {
+                Button(onClick = {
+                    input += "1"
+                    output += "1"
+                }) {
+                    Text("1")
+                }
+
+                Button(onClick = {
+                    input += "4"
+                    output += "4"
+                }) {
+                    Text("4")
+                }
+
+                Button(onClick = {
+                    input += "7"
+                    output += "7"
+                }) {
+                    Text("7")
+                }
+                Button(onClick = {
+                    input += "."
+                    output += "."
+                }) {
+                    Text(".")
+                }
+
+            }
+
+            Column(
+                modifier = modifier,
+                verticalArrangement = Arrangement.spacedBy(30.dp),
+                horizontalAlignment = AbsoluteAlignment.Right
+            )
+            {
+                Button(onClick = {
+                    input += "2"
+                    output += "2"
+                }) {
+                    Text("2")
+                }
+
+                Button(onClick = {
+                    input += "5"
+                    output += "5"
+                }) {
+                    Text("5")
+                }
+
+                Button(onClick = {
+                    input += "8"
+                    output += "8"
+                }) {
+                    Text("8")
+                }
+                Button(onClick = {
+                    input += "0"
+                    output += "0"
+                }) {
+                    Text("0")
+                }
+
+            }
+
+            Column(
+                modifier = modifier,
+                verticalArrangement = Arrangement.spacedBy(30.dp),
+                horizontalAlignment = AbsoluteAlignment.Right
+            )
+            {
+                Button(onClick = {
+                    input += "3"
+                    output += "3"
+                }) {
+                    Text("3")
+                }
+
+                Button(onClick = {
+                    input += "6"
+                    output += "6"
+                }) {
+                    Text("6")
+                }
+
+                Button(onClick = {
+                    input += "9"
+                    output += "9"
+                }) {
+                    Text("9")
+                }
+                Button(onClick =
+                {
+                    num2 = input
+                when(symbol1)
+                {
+                    "1" -> outputNum = num1.toDouble() + num2.toDouble()
+                    "2" -> outputNum = num1.toDouble() - num2.toDouble()
+                    "3" -> outputNum = num1.toDouble() * num2.toDouble()
+                    "4" -> outputNum = num1.toDouble() / num2.toDouble()
+                }
+                    output = outputNum.toString()
+
+                }) {
+                    Text("=")
+                }
 
 
+            }
+            Column(
+                modifier = modifier,
+                verticalArrangement = Arrangement.spacedBy(30.dp),
+                horizontalAlignment = AbsoluteAlignment.Right
+            )
+            {
+
+                Button(onClick = {
+                    num1 = input
+                    input = ""
+                    output += "+"
+                    symbol1 = "1"
+                }) {
+                    Text("+")
+                }
+
+                Button(onClick = {
+                    num1 = input
+                    input = ""
+                    output += "-"
+                    symbol1 = "2"
+                }) {
+                    Text("-")
+                }
+
+                Button(onClick = {
+                    num1 = input
+                    input = ""
+                    output += "*"
+                    symbol1 = "3"
+                }) {
+                    Text("*")
+                }
+                Button(onClick = {
+                    num1 = input
+                    input = ""
+                    output += "/"
+                    symbol1 = "4"
+                }) {
+                    Text("/")
+                }
+
+            }
+
+        }
 }
-
-
-
-
-
-
+}
 
 @Preview(showBackground = true)
 @Composable
